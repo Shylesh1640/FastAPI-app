@@ -119,10 +119,16 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
+    { name = "pydantic" },
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "fastapi", extras = ["standard"], specifier = ">=0.128.5" }]
+requires-dist = [
+    { name = "fastapi", extras = ["standard"], specifier = ">=0.128.5" },
+    { name = "pydantic", specifier = ">=2.12.5" },
+    { name = "uvicorn", specifier = ">=0.40.0" },
+]
 
 [[package]]
 name = "fastapi-cli"
