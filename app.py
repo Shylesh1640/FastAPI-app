@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pydantic import BaseModel, Field
+from fastapi import status
 
 app = FastAPI(title="My FastAPI Learning")
 
@@ -39,3 +40,19 @@ class ProductCreate(BaseModel):
 def create_product(p: ProductCreate):
     return p.model_dump()
 #curl command = curl -X POST "http://127.0.0.1:8000/products" -H "Content-Type: application/json" -d "{\"name\": \"Product1\", \"price\": 100.0, \"stock\": 10}"
+
+@app.post("/items", status_code=status.HTTP_201_CREATED)
+def create_item():
+    return {"created": True}
+
+#curl command = curl -X POST "http://127.0.0.1:8000/items" -H "Content-Type: application/json" -d "{}"
+
+Fake_DB = {1: "Shylesh", 2: "John", 3: "Alice"}
+
+@app.get("/users/db/{user_id}")
+def user_from_db(user_id: int):
+    if user_id not in Fake_DB:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"user_id": user_id, "name": Fake_DB[user_id]}
+
+#curl command = curl -X GET "http://127.0.0.1:8000/users/db/1"
