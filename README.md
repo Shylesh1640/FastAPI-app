@@ -4,7 +4,7 @@ A simple FastAPI application for learning API development with Python.
 
 ## Requirements
 
-- Python 3.11+
+- Python 3.12+
 - FastAPI
 - Pydantic
 - Uvicorn
